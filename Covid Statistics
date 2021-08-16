@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<!--
+    WARNING! Make sure that you match all Quasar related
+    tags to the same version! (Below it's "@2.0.3")
+  -->
+
+<head>
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet" type="text/css">
+  <link href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"
+    rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@^4.0.0/animate.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/quasar@2.0.3/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <!-- example of injection point where you write your app template -->
+  <div id="q-app">
+    <div class="text-center" style="margin-bottom: 0rem;">
+      <div class="col-6">
+        <q-img style="height: 40vh;" src="https://github.com/chandrevdw31/covid-19-za/blob/main/Group%2037.png?raw=true">
+        </q-img>
+      </div>
+    </div>
+    <div class="row justify-around" style="margin-bottom: 50px; margin-left: 50px; margin-right: 50px" id="summary">
+      <q-card class="shadow-21 text-center" style="height:236px; width:244px">
+        <q-card-section>
+          <q-icon style="font-size: 60px; color: rgb(7, 131, 153);margin-top:10px;" class="material-icons-outlined"
+            name="vaccines"></q-icon>
+          <div class="text-h6" style="margin-top: 10px;">Tests Conducted</div>
+          <div class="text-caption" style="margin-top: 5px; color: rgb(121, 144, 148); font-size:10px;">Last Updated: {{
+            totalTestsConducted[0]['date'] }}</div>
+          <div class="text-h4 text-center text-bold" style="margin-top:15px; color: rgb(7, 131, 153);">{{
+            totalTestsConducted[0]['cumulative_tests'].toLocaleString("en", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+            })
+            }}</div>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="shadow-21 text-center" style="height:236px; width:244px">
+        <q-card-section>
+          <q-icon style="font-size: 60px; color: rgb(202, 173, 7); margin-top:10px;" class="material-icons-outlined"
+            name="sick"></q-icon>
+          <div class="text-h6" style="margin-top: 10px;">Total Positive Cases</div>
+          <div class="text-caption" style="margin-top: 5px; color: rgb(121, 144, 148);font-size:10px;">Last Updated: {{
+            totalConfirmedCases[0]['date'] }}</div>
+          <div class="text-h4  text-center text-bold" style="margin-top:15px;color: rgb(202, 173, 7);">{{
+            totalConfirmedCases[0]['total'].toLocaleString("en", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+            })
+            }}</div>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="shadow-21 text-center" style="height:236px; width:244px">
+        <q-card-section>
+          <q-icon style="font-size: 60px; color: rgb(160, 64, 64);margin-top:10px;" class="material-icons-outlined"
+            name="sentiment_dissatisfied"></q-icon>
+          <div class="text-h6" style="margin-top: 10px;">Total Deaths</div>
+          <div class="text-caption" style="margin-top: 5px;color: rgb(121, 144, 148);font-size:10px;">Last Updated: {{
+            totalDeaths[0]['date'] }}</div>
+          <div class="text-h4 text-center text-bold" style="margin-top:15px;color: rgb(160, 64, 64);">{{
+            totalDeaths[0]['total'].toLocaleString("en", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+            })
+            }}</div>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="shadow-21 text-center" style="height:236px; width:244px">
+        <q-card-section>
+          <q-icon style="font-size: 60px; color: rgb(26, 155, 1);margin-top:10px;" class="material-icons-outlined"
+            name="health_and_safety"></q-icon>
+          <div class="text-h6" style="margin-top: 10px;">Total Recoveries</div>
+          <div class="text-caption" style="margin-top: 5px;color: rgb(121, 144, 148);font-size:10px;">Last Updated: {{
+            totalRecoveries[0]['date'] }}</div>
+          <div class="text-h4 text-center text-bold" style="margin-top:15px;color: rgb(26, 155, 1);">{{
+            totalRecoveries[0]['total'].toLocaleString("en", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+            })
+            }}</div>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="shadow-21 text-center">
+        <q-card-section>
+          <q-icon style="font-size: 60px; color: rgb(2, 105, 119);margin-top:10px;" class="material-icons-outlined"
+            name="add_moderator"></q-icon>
+          <div class="text-h6" style="margin-top: 10px;">Vaccines Administered</div>
+          <div class="text-caption" style="margin-top: 5px;color: rgb(121, 144, 148);font-size:10px;">Last Updated: {{
+            totalVaccinations[0]['date'] }}</div>
+          <div class="text-h4 text-center text-bold" style="margin-top:15px; color: rgb(2, 105, 119);">{{
+            totalVaccinations[0]['vaccinations'].toLocaleString("en", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+            })
+            }}</div>
+        </q-card-section>
+      </q-card>
+
+    </div>
+    <div class="row justify-around" style="margin-bottom: 50px; margin-left: 50px; margin-right: 50px" id="cards">
+      <q-card v-for="(province, index) in provinces" :key="province" style="width: 325px;margin-top:50px;"
+        class="col-4 shadow-21">
+        <q-card-section horizontal>
+          <img :src="province.url" class="col-5"
+            style="height: 140px; max-width: 150px; margin-bottom: 25px; margin-left: 10px ; margin-top: 25px; margin-right:10px" />
+          <q-separator vertical></q-separator>
+          <div class="row justified-center">
+            <div class="text-h6 col-12 text-center">{{ province.name }}</div>
+            <div class="text-caption col-12 text-center">Confirmed Cases: <br> <span
+                style="color:rgb(255, 102, 0); font-weight:bold" class="text-subtitle1">{{
+                totalConfirmedCases[0][province.key] }}</span></div>
+            <div class="text-caption col-12 text-center">Deaths: <br> <span style="color:red; font-weight:bold"
+                class="text-subtitle1">{{ totalDeaths[0][province.key] }}</span></div>
+            <div class="text-caption col-12 text-center">Recoveries: <br> <span style="color:green; font-weight:bold"
+                class="text-subtitle1">{{ totalRecoveries[0][province.key] }}</span></div>
+          </div>
+        </q-card-section>
+
+        <q-separator> </q-separator>
+
+        <q-card-actions class="row justify-between">
+          <q-btn flat type="a" href="start/pick-quasar-flavour" label="Vaccination Sites" text-color="green-9">
+          </q-btn>
+          <q-btn flat type="a" href="https://vaccine.enroll.health.gov.za/#/" label="Enroll on EVDS"
+            text-color="green-9">
+          </q-btn>
+        </q-card-actions>
+      </q-card>
+      
+    </div>
+    <div class="row" style="position: fixed; bottom: 0; width:100vw; height: 3rem; margin-top: 5rem; background-color: rgba(0, 0, 0, 0.651); align-self: center; align-content: center;">
+      <div class="col text-white text-center text-h6" style="width:100vw;">
+        {{ disclaimer }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Add the following at the end of your body tag -->
+  <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/danfojs@0.2.4/lib/bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quasar@2.0.3/dist/quasar.umd.prod.js"></script>
+
+  <script>
+    /*
+      Example kicking off the UI. Obviously, adapt this to your specific needs.
+      Assumes you have a <div id="q-app"></div> in your <body> above
+     */
+
+    const app = Vue.createApp({
+      data() {
+        return {
+          disclaimer: 'Data Science for Social Impact Research Group @ University of Pretoria, Coronavirus COVID-19 (2019-nCoV) Data Repository for South Africa. Available on: https://github.com/dsfsi/covid19za.',
+          loading: true,
+          provinces: [{ name: 'Western Cape', url: 'https://southafrica.co.za/images/western-cape-coat-of-arms-786x692.jpg', key: 'WC' },
+          { name: 'Eastern Cape', url: 'https://southafrica.co.za/images/eastern-cape-arms-786x597.jpg', key: 'EC' },
+          { name: 'Northern Cape', url: 'https://southafrica.co.za/images/northern-cape-province-arms-786x633.jpg', key: 'NC' },
+          { name: 'KwaZulu-Natal', url: 'https://www.heraldry-wiki.com/heraldrywiki/images/1/1e/Kwazulun.jpg', key: 'KZN' },
+          { name: 'Freestate', url: 'https://southafrica.co.za/images/free-state-arms-786x638.jpg', key: 'FS' },
+          { name: 'Limpopo', url: 'https://southafrica.co.za/images/limpopo-province-arms-786x715.jpg', key: 'LP' },
+          { name: 'Gauteng', url: 'https://southafrica.co.za/images/gauteng-logo-786x613.jpg', key: 'GP' },
+          { name: 'Mampumalanga', url: '	https://southafrica.co.za/images/mpumalanga-province-vector-891509-786x589.jpg', key: 'MP' },
+          { name: 'North West', url: 'https://southafrica.co.za/images/north-west-province-arms-logo-786x744.jpg', key: 'NW' }],
+          totalDeaths: [],
+          totalRecoveries: [],
+          totalConfirmedCases: [],
+          totalVaccinations: [],
+          totalTestsConducted: []
+        }
+      },
+      methods: {
+        loadTesting() {
+          dfd.read_csv("https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_testing.csv")
+            .then(df => {
+              df.sort_values({ by: "YYYYMMDD", inplace: true, ascending: false })
+              df.to_json().then((json) => {
+                this.totalTesting = JSON.parse(json)
+              })
+
+            }).catch(err => {
+              console.log(err);
+            })
+        },
+        loadRecoveries() {
+          dfd.read_csv("https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_recoveries.csv")
+            .then(df => {
+
+              df.sort_values({ by: "YYYYMMDD", inplace: true, ascending: false })
+              df.to_json().then((json) => {
+                this.totalRecoveries = JSON.parse(json)
+              })
+
+            }).catch(err => {
+              console.log(err);
+            })
+        },
+        loadTestsConducted() {
+          dfd.read_csv("https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_testing.csv")
+            .then(df => {
+
+              df.sort_values({ by: "YYYYMMDD", inplace: true, ascending: false })
+              df.to_json().then((json) => {
+                this.totalTestsConducted = JSON.parse(json)
+              })
+
+            }).catch(err => {
+              console.log(err);
+            })
+        },
+        loadVaccinations() {
+          dfd.read_csv("https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_vaccination.csv")
+            .then(df => {
+              df.sort_values({ by: "YYYYMMDD", inplace: true, ascending: false })
+              df.to_json().then((json) => {
+                this.totalVaccinations = JSON.parse(json)
+              })
+
+            }).catch(err => {
+              console.log(err);
+            })
+        },
+        loadConfirmedCases() {
+          dfd.read_csv("https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv")
+            .then(df => {
+              df.sort_values({ by: "YYYYMMDD", inplace: true, ascending: false })
+              df.to_json().then((json) => {
+                this.totalConfirmedCases = JSON.parse(json)
+              })
+
+            }).catch(err => {
+              console.log(err);
+            })
+        },
+        loadDeaths() {
+          dfd.read_csv("https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv")
+            .then(df => {
+              df.sort_values({ by: "YYYYMMDD", inplace: true, ascending: false })
+              df.to_json().then((json) => {
+                this.totalDeaths = JSON.parse(json)
+              })
+
+            }).catch(err => {
+              console.log(err);
+            })
+        }
+      },
+      mounted() {
+        this.loadVaccinations()
+        this.loadDeaths()
+        this.loadRecoveries()
+        this.loadConfirmedCases()
+        this.loadTestsConducted()
+      }
+    })
+    app.use(Quasar)
+    app.mount('#q-app')
+  </script>
+</body>
+
+</html>
