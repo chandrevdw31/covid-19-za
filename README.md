@@ -12,11 +12,11 @@ This repo contains files created for both a standalone website on [Github Pages]
 I wanted to add Covid-19 statistics to a WordPress website, however was facing issues with existing plugins. 
 Using a raw html editor / shortcode editor like Elementor or XYZ HTML Snippets allowed me to copy the single file into a block easily.
 
-Quasar UMD - Single HTML document Vue JS: [/widgets/](/widgets/)]
+Quasar UMD - Single HTML document Vue JS: [/widgets/](/widgets/)
 
-Figma Exported Files: [/assets/png](/assets/png)]
+Figma Exported Files: [/assets/png](/assets/png)
 
-Figma Design Files: [/assets/figma](/assets/figma)]
+Figma Design Files: [/assets/figma](/assets/figma)
 
 ## Terms of Use
 
