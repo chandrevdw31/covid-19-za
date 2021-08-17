@@ -20,7 +20,8 @@
   <div id="q-app">
     <div class="text-center" style="margin-bottom: 5rem;">
       <div class="col-6">
-        <q-img style="height: 40vh;" src="https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2378&q=80">
+        <q-img style="height: 40vh;"
+          src="https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2378&q=80">
           <div class="absolute-bottom text-center text-h1">
             ZA Covid 19 Statistics
           </div>
@@ -113,8 +114,9 @@
       <q-card v-for="(province, index) in provinces" :key="province" style="width: 325px;margin-top:50px;"
         class="col-4 shadow-21">
         <q-card-section horizontal>
-          <img :src="province.url" class="col-5"
-            style="height: 140px; max-width: 150px; margin-bottom: 25px; margin-left: 10px ; margin-top: 25px; margin-right:10px" />
+          <q-img :src="province.url" class="col-5" loading="lazy" fit="fill"
+
+            style="height: 140px; max-width: 150px; margin-bottom: 25px; margin-left: 10px ; margin-top: 25px; margin-right:10px" ></q-img>
           <q-separator vertical></q-separator>
           <div class="row justified-center">
             <div class="text-h6 col-12 text-center">{{ province.name }}</div>
@@ -131,16 +133,17 @@
         <q-separator> </q-separator>
 
         <q-card-actions class="row justify-between">
-          <q-btn flat type="a" href="start/pick-quasar-flavour" label="Vaccination Sites" text-color="green-9">
+          <q-btn flat type="a" :href="province.vac_url" target="_blank" label="Vaccination Sites" text-color="green-9">
           </q-btn>
-          <q-btn flat type="a" href="https://vaccine.enroll.health.gov.za/#/" label="Enroll on EVDS"
+          <q-btn flat type="a" href="https://vaccine.enroll.health.gov.za/#/" target="_blank" label="Enroll on EVDS"
             text-color="green-9">
           </q-btn>
         </q-card-actions>
       </q-card>
-      
+
     </div>
-    <div class="row" style="position: fixed; bottom: 0; width:100vw; height: 3rem; margin-top: 5rem; background-color: rgba(0, 0, 0, 0.651); align-self: center; align-content: center;">
+    <div class="row"
+      style="position: fixed; bottom: 0; width:100vw; height: 3rem; margin-top: 5rem; background-color: rgba(0, 0, 0, 0.651); align-self: center; align-content: center;">
       <div class="col text-white text-center text-h6" style="width:100vw;">
         {{ disclaimer }}
       </div>
@@ -165,15 +168,15 @@
         return {
           disclaimer: 'Data Science for Social Impact Research Group @ University of Pretoria, Coronavirus COVID-19 (2019-nCoV) Data Repository for South Africa. Available on: https://github.com/dsfsi/covid19za.',
           loading: true,
-          provinces: [{ name: 'Western Cape', url: 'https://southafrica.co.za/images/western-cape-coat-of-arms-786x692.jpg', key: 'WC' },
-          { name: 'Eastern Cape', url: 'https://southafrica.co.za/images/eastern-cape-arms-786x597.jpg', key: 'EC' },
-          { name: 'Northern Cape', url: 'https://southafrica.co.za/images/northern-cape-province-arms-786x633.jpg', key: 'NC' },
-          { name: 'KwaZulu-Natal', url: 'https://www.heraldry-wiki.com/heraldrywiki/images/1/1e/Kwazulun.jpg', key: 'KZN' },
-          { name: 'Freestate', url: 'https://southafrica.co.za/images/free-state-arms-786x638.jpg', key: 'FS' },
-          { name: 'Limpopo', url: 'https://southafrica.co.za/images/limpopo-province-arms-786x715.jpg', key: 'LP' },
-          { name: 'Gauteng', url: 'https://southafrica.co.za/images/gauteng-logo-786x613.jpg', key: 'GP' },
-          { name: 'Mampumalanga', url: '	https://southafrica.co.za/images/mpumalanga-province-vector-891509-786x589.jpg', key: 'MP' },
-          { name: 'North West', url: 'https://southafrica.co.za/images/north-west-province-arms-logo-786x744.jpg', key: 'NW' }],
+          provinces: [{ name: 'Western Cape', url: 'https://southafrica.co.za/images/western-cape-coat-of-arms-786x692.jpg', key: 'WC', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-db7ac6fbef89116f56f' },
+          { name: 'Eastern Cape', url: 'https://southafrica.co.za/images/eastern-cape-arms-786x597.jpg', key: 'EC', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-50d834971fbe08c0814' },
+          { name: 'Northern Cape', url: 'https://southafrica.co.za/images/northern-cape-province-arms-786x633.jpg', key: 'NC', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-1bc92d4904fd9b62f8b' },
+          { name: 'KwaZulu-Natal', url: 'https://www.heraldry-wiki.com/heraldrywiki/images/1/1e/Kwazulun.jpg', key: 'KZN', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-07351d0bb57a47090d4' },
+          { name: 'Freestate', url: 'https://southafrica.co.za/images/free-state-arms-786x638.jpg', key: 'FS', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-921bce3a1f8e1486bc9' },
+          { name: 'Limpopo', url: 'https://southafrica.co.za/images/limpopo-province-arms-786x715.jpg', key: 'LP', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-ed26449d4afffebd6b6' },
+          { name: 'Gauteng', url: 'https://southafrica.co.za/images/gauteng-logo-786x613.jpg', key: 'GP', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-614955392d80ac92f1c' },
+          { name: 'Mampumalanga', url: 'https://southafrica.co.za/images/mpumalanga-province-vector-891509-786x589.jpg', key: 'MP', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-cdb24ed09bdb756ff78' },
+          { name: 'North West', url: 'https://southafrica.co.za/images/north-west-province-arms-logo-786x744.jpg', key: 'NW', vac_url: 'https://sacoronavirus.co.za/active-vaccination-sites/#tab-d2bbc68ecd9a7e01236' }],
           totalDeaths: [],
           totalRecoveries: [],
           totalConfirmedCases: [],
@@ -257,7 +260,7 @@
             })
         }
       },
-      mounted() {
+      created() {
         this.loadVaccinations()
         this.loadDeaths()
         this.loadRecoveries()
